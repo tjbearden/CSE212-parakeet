@@ -39,7 +39,23 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return new double[0]; // replace this return statement with your own
+
+        //Plan
+        //Create array
+        //Create loop to add to the array the multiple value working with Length
+        //Increase the loop by 1
+        //return the array
+        
+        //aray
+        double[] results = new double[length]; 
+        //loop
+         for(int i = 0; i < length; i++)
+        //calculates the value to the array
+        {
+            results[i] = number*(i+1);        
+        }
+        //returns results
+        return results; 
     }
     
     /// <summary>
@@ -56,6 +72,24 @@ public static class ArraysTester {
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+
+        //Plan
+        //Create Loop with the amount value
+        //Loop gets the last number, removes it, places at the start of array. 
+
+
+
+         for(int i = 0; i < amount; i++)
+        {
+            //get last number 
+            int lastnum = data[data.Count-1];
+            //delete last number 
+            data.RemoveAt(data.Count-1);
+            //insert last number at start 
+            data.Insert(0,lastnum);
+            
+        }
 
     }
 }
