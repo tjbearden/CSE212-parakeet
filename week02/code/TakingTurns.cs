@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
  * CSE212 
  * (c) BYU-Idaho
  * 04-Prove - Problem 1
@@ -25,7 +25,7 @@ public static class TakingTurns {
         // Console.WriteLine(players);    // This can be un-commented out for debug help
         while (players.Length > 0)
             players.GetNextPerson();
-        // Defect(s) Found: 
+        // Defect(s) Found: Enqueue was inserting at index 0, not appending to end.
 
         Console.WriteLine("---------");
 
@@ -48,7 +48,7 @@ public static class TakingTurns {
         while (players.Length > 0)
             players.GetNextPerson();
 
-        // Defect(s) Found: 
+        // Defect(s) Found: None.
 
         Console.WriteLine("---------");
 
@@ -66,7 +66,7 @@ public static class TakingTurns {
             players.GetNextPerson();
             // Console.WriteLine(players);
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: Players with infinite turns not being requeued.
 
         Console.WriteLine("---------");
 
@@ -76,6 +76,6 @@ public static class TakingTurns {
         Console.WriteLine("Test 4");
         players = new TakingTurnsQueue();
         players.GetNextPerson();
-        // Defect(s) Found:
+        // Defect(s) Found: None.
     }
 }

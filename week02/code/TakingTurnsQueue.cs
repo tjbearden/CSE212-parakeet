@@ -29,21 +29,56 @@ public class TakingTurnsQueue {
     /// person has an infinite number of turns.  An error message is displayed 
     /// if the queue is empty.
     /// </summary>
-    public void GetNextPerson() {
+        public void GetNextPerson() {
         if (_people.IsEmpty())
             Console.WriteLine("No one in the queue.");
         else {
             Person person = _people.Dequeue();
-            if (person.Turns > 1) {
-                person.Turns -= 1;
+            Console.WriteLine(person.Name);
+            if (person.Turns > 0) {
+                person.Turns--;
+                if (person.Turns > 0) {
+                    _people.Enqueue(person);
+                }
+            }
+            else if (person.Turns == 0) {
                 _people.Enqueue(person);
             }
-
-            Console.WriteLine(person.Name);
         }
     }
 
     public override string ToString() {
         return _people.ToString();
+    }
+    public class PersonQueue {
+        private readonly Queue<Person> _queue = new Queue<Person>();
+
+        public bool IsEmpty() {
+            return _queue.Count == 0;
+        }
+
+        public int Length => _queue.Count;
+
+        public void Enqueue(Person person) {
+            _queue.Enqueue(person);
+        }
+
+        public Person Dequeue() {
+            return _queue.Dequeue();
+        }
+
+        public override string ToString() {
+            return string.Join(", ", _queue.Select(person => $"{person.Name}({person.Turns})"));
+        }
+    }
+
+    public class Person {
+        public string Name { get; }
+        public int Turns { get; set; }
+
+        public Person(string name, int turns) {
+            Name = name;
+            Turns = turns;
+        }
     }
 }
