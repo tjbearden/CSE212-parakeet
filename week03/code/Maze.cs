@@ -30,6 +30,8 @@ public class Maze {
     /// </summary>
     public void MoveLeft() {
         // FILL IN CODE
+        var newPosition =(_currX - 1, _currY);
+        Move(newPosition, "left");
     }
 
     /// <summary>
@@ -38,6 +40,9 @@ public class Maze {
     /// </summary>
     public void MoveRight() {
         // FILL IN CODE
+        var newPosition = (_currX + 1, _currY);
+        Move(newPosition, "right");
+
     }
 
     /// <summary>
@@ -46,6 +51,8 @@ public class Maze {
     /// </summary>
     public void MoveUp() {
         // FILL IN CODE
+        var newPosition = (_currX, _currY - 1);
+        Move(newPosition, "up");
     }
 
     /// <summary>
@@ -54,8 +61,41 @@ public class Maze {
     /// </summary>
     public void MoveDown() {
         // FILL IN CODE
+        var newPosition = (_currX, _currY + 1);
+        Move(newPosition, "down");
     }
 
+    /// <summary>
+    /// Implement a movement method to simplify other code.  If unable to move then display "Can't go that way!".
+    /// </summary>
+
+    public void Move(ValueTuple<int, int> newPosition, string direction){
+        if (_mazeMap.TryGetValue((_currX, _currY), out var currentCell)) {
+            bool canMove = false;
+            switch (direction){
+                case "left":
+                    canMove = currentCell[0];
+                    break;
+                case "right":
+                    canMove = currentCell[1];
+                    break;
+                case "up":
+                    canMove = currentCell[2];
+                    break;
+                case "down":
+                    canMove = currentCell[3];
+                    break;
+            }
+            if (canMove) {
+                _currX = newPosition.Item1;
+                _currY = newPosition.Item2;
+                Console.WriteLine($"Moved {direction}");
+            }
+            else {
+                Console.WriteLine("Can't go that way!");
+            }
+        }
+    }
     public void ShowStatus() {
         Console.WriteLine($"Current location (x={_currX}, y={_currY})");
     }

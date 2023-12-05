@@ -111,6 +111,17 @@ public static class SetsAndMapsTester {
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+        HashSet<string> seen = new HashSet<string>();
+
+        foreach (var word in words) {
+            string reversed = new string(word.Reverse().ToArray());
+            if (seen.Contains(reversed) && word != reversed) {
+                Console.WriteLine($"{word} & {reversed}");
+            }
+            else {
+                seen.Add(word);
+            }
+        }
     }
 
     /// <summary>
@@ -132,6 +143,15 @@ public static class SetsAndMapsTester {
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+            
+            string degree = fields[3].Trim();
+
+            if (degrees.ContainsKey(degree)) {
+                degrees[degree]++;
+            }
+            else {
+                degrees[degree] = 1;
+            }
         }
 
         return degrees;
@@ -158,7 +178,9 @@ public static class SetsAndMapsTester {
     /// #############
     private static bool IsAnagram(string word1, string word2) {
         // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+        string sanatizedWord1 = new string(word1.Where(char.IsLetter).ToArray()).ToLower();
+        string sanatizedWord2 = new string(word2.Where(char.IsLetter).ToArray()).ToLower();
+        return String.Concat(sanatizedWord1.OrderBy(c => c)) == String.Concat(sanatizedWord2.OrderBy(c => c));
     }
 
     /// <summary>
@@ -232,5 +254,9 @@ public static class SetsAndMapsTester {
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
         // 1. Add your code to map the json to the feature collection object
         // 2. Print out each place a earthquake has happened today
+
+        foreach (var feature in featureCollection.Features){
+            Console.WriteLine($"{feature.Properties.Place} - Mag {feature.Properties.Mag}");
+        }
     }
 }
