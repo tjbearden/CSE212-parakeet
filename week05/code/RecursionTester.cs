@@ -147,7 +147,14 @@ public static class RecursionTester {
     /// </summary>
     public static int SumSquaresRecursive(int n) {
         // TODO Start Problem 1
-        return 0;
+        if (n<=0)
+        {   
+            return 0;
+        }
+        else
+        {
+            return n * n + SumSquaresRecursive(n - 1);
+        }
     }
 
     /// <summary>
@@ -322,8 +329,21 @@ public static class RecursionTester {
     /// Using recursion, display all possible binary strings for a given pattern.  You might find 
     /// some of the string functions like IndexOf and [..X] / [X..] to be useful in solving this problem.
     /// </summary>
-    public static void WildcardBinary(string pattern) {
+     public static void WildcardBinary(string pattern, int index = 0, string current ="") {
         // TODO Start Problem 4
+
+        if (index == pattern.Length) {
+            Console.WriteLine(current);
+            return;
+        }
+
+        if (pattern[index] != '*') {
+            WildcardBinary(pattern, index + 1, current + pattern[index]);
+        }
+        else {
+            WildcardBinary(pattern, index + 1, current + '0');
+            WildcardBinary(pattern, index + 1, current + '1');
+        }
     }
 
     /// <summary>
@@ -340,6 +360,26 @@ public static class RecursionTester {
 
         // TODO Start Problem 5
         // ADD CODE HERE
+           currPath.Add((x,y));
+
+        if (maze.IsEnd(x, y)) {
+        
+        Console.WriteLine(currPath.AsString());
+        } 
+        else {
+            if (maze.IsValidMove(currPath, x + 1, y)) {
+                SolveMaze(maze, x + 1, y, new List<ValueTuple<int, int>>(currPath));
+            }
+            if (maze.IsValidMove(currPath, x - 1, y)) {
+                SolveMaze(maze, x - 1, y, new List<ValueTuple<int, int>>(currPath));
+            }
+            if (maze.IsValidMove(currPath, x, y + 1)) {
+                SolveMaze(maze, x, y + 1, new List<ValueTuple<int, int>>(currPath));
+            }
+            if (maze.IsValidMove(currPath, x, y - 1)) {
+                SolveMaze(maze, x, y - 1, new List<ValueTuple<int, int>>(currPath));
+            }
+        }
 
         // Console.WriteLine(currPath.AsString()); // Use this to print out your path when you find the solution
     }
