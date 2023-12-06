@@ -17,6 +17,7 @@ public static class TakingTurns {
         // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3) and
         //           run until the queue is empty
         // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
+            //
         Console.WriteLine("Test 1");
         var players = new TakingTurnsQueue();
         players.AddPerson("Bob", 2);
@@ -25,7 +26,7 @@ public static class TakingTurns {
         // Console.WriteLine(players);    // This can be un-commented out for debug help
         while (players.Length > 0)
             players.GetNextPerson();
-        // Defect(s) Found: Enqueue was inserting at index 0, not appending to end.
+        // Defect(s) Found: Enqueue was inserting at index 0, not appending to end. Error fixed
 
         Console.WriteLine("---------");
 
